@@ -1,0 +1,38 @@
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./:/var/www
+      - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - 8876:80
+    depends_on:
+      - app
+    container_name: shop_nginx
+
+  app:
+    build:
+      context: .
+      dockerfile: _docker/app/Dockerfile
+    volumes:
+      - ./:/var/www
+    container_name: shop_app
+    depends_on:
+      - db
+    command: sh -c "chmod -R 775 storage bootstrap/cache && composer install && php-fpm"
+
+  db:
+    image: postgres:15
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: shop
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+    container_name: shop_postgres
+
+volumes:
+  postgres_data:
