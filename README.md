@@ -15,7 +15,14 @@ docker-compose exec app cp .env.example .env
 docker-compose exec app php artisan key:generate
 
 
+# Войдите в контейнер приложения
+docker-compose exec app bash
 
+# Внутри контейнера сгенерируйте ключ
+php artisan key:generate
+
+# Или выполните одной командой без входа в контейнер
+docker-compose exec app php artisan key:generate
 
 # Убедитесь, что .env содержит настройки PostgreSQL
 
