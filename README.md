@@ -7,20 +7,15 @@ docker-compose down
 docker-compose build --no-cache
 docker-compose up -d
 
-Установите зависимости:
-docker-compose exec app composer install
-
-Настройте приложение:
-docker-compose exec app cp .env.example .env
-docker-compose exec app php artisan key:generate
-
-
 # Установите зависимости
 docker-compose exec app composer install
 
 # Настройте .env
 docker-compose exec app cp .env.example .env
 docker-compose exec app php artisan key:generate
+
+
+
 
 # Убедитесь, что .env содержит настройки PostgreSQL
 
