@@ -7,6 +7,13 @@ docker-compose down
 docker-compose build --no-cache
 docker-compose up -d
 
+
+✅ Теперь вы можете запустить Vite в контейнере:
+docker-compose exec app npm run dev
+
+http://localhost:5173 — для Vite
+http://localhost:8876 — для Laravel
+
 Установите зависимости:
 docker-compose exec app composer install
 
